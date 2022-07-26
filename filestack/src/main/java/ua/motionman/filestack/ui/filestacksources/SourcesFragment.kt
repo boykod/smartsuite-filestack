@@ -12,6 +12,7 @@ import com.filestack.Sources
 import ua.motionman.filestack.R
 import ua.motionman.filestack.databinding.SourcesFragmentBinding
 import ua.motionman.filestack.domain.model.SourceModel
+import ua.motionman.filestack.domain.model.UploadResult
 import ua.motionman.filestack.ui.uploadingprogress.UploadingProgressFragment.Companion.SELECTIONS_KEY
 import ua.motionman.filestack.utils.delegate.viewBinding
 import ua.motionman.filestack.utils.extensions.toSelection
@@ -36,15 +37,15 @@ class SourcesFragment : Fragment(R.layout.sources_fragment) {
     }
 
     private fun handleArguments() {
-        arguments?.getBoolean(COMPLETE_UPLOAD_KEY)?.let { isComplete ->
-            if (isComplete) {
-                val intent = Intent().apply {
-                    putExtra("IS_COMPLETE", isComplete)
-                }
-                activity?.setResult(Activity.RESULT_OK, intent)
-                activity?.finish()
-                return
+        val isComplete = arguments?.getBoolean(COMPLETE_UPLOAD_KEY) ?: false
+
+        if (isComplete) {
+            val result = arguments?.getSerializable(UPLOAD_RESULT_KEY) ?: emptyArray<UploadResult>()
+            val intent = Intent().apply {
+                putExtra(BUNDLE_RESULT_KEY, result)
             }
+            activity?.setResult(Activity.RESULT_OK, intent)
+            activity?.finish()
         }
     }
 
@@ -93,5 +94,7 @@ class SourcesFragment : Fragment(R.layout.sources_fragment) {
 
     companion object {
         const val COMPLETE_UPLOAD_KEY = "complete_upload"
+        const val UPLOAD_RESULT_KEY = "upload_result"
+        const val BUNDLE_RESULT_KEY = "bundle_result"
     }
 }

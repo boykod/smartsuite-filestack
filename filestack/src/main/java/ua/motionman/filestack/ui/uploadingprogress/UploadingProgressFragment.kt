@@ -10,7 +10,9 @@ import androidx.navigation.fragment.findNavController
 import ua.motionman.filestack.R
 import ua.motionman.filestack.databinding.UploadingProgressBinding
 import ua.motionman.filestack.domain.model.Selection
+import ua.motionman.filestack.domain.model.UploadResult
 import ua.motionman.filestack.ui.filestacksources.SourcesFragment.Companion.COMPLETE_UPLOAD_KEY
+import ua.motionman.filestack.ui.filestacksources.SourcesFragment.Companion.UPLOAD_RESULT_KEY
 import ua.motionman.filestack.utils.delegate.viewBinding
 
 class UploadingProgressFragment : Fragment(R.layout.uploading_progress) {
@@ -34,14 +36,14 @@ class UploadingProgressFragment : Fragment(R.layout.uploading_progress) {
 
     private fun initFlowSubscriber() {
         lifecycleScope.launchWhenStarted {
-            vm.viewState.collect { state ->
-                updateUi(state)
-                if (state.isUploadFinish) handleOnFinish(true)
-            }
+            vm.viewState.collect { updateUi(it) }
+        }
+        lifecycleScope.launchWhenStarted {
+            vm.uploadEvent.collect { handleOnFinish(true, it.uploadResult) }
         }
     }
 
-    private fun updateUi(state: UploadingState) {
+    private fun updateUi(state: UiState) {
         with(binding) {
             progressBar.setProgress(state.progress, true)
             uploadingTitle.text =
@@ -54,10 +56,14 @@ class UploadingProgressFragment : Fragment(R.layout.uploading_progress) {
         vm.uploadSelections(selections, requireContext().contentResolver)
     }
 
-    private fun handleOnFinish(isComplete: Boolean) {
+    private fun handleOnFinish(
+        isComplete: Boolean,
+        result: Array<UploadResult> = emptyArray()
+    ) {
         vm.cancelUpload()
         findNavController().navigate(R.id.uploadingToSources, Bundle().apply {
             putBoolean(COMPLETE_UPLOAD_KEY, isComplete)
+            if (isComplete) putSerializable(UPLOAD_RESULT_KEY, result)
         })
     }
 

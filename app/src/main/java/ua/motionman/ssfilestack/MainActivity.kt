@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import ua.motionman.filestack.domain.model.UploadResult
 import ua.motionman.filestack.ui.FilestackActivity
+import ua.motionman.filestack.ui.filestacksources.SourcesFragment.Companion.BUNDLE_RESULT_KEY
 import ua.motionman.ssfilestack.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -27,8 +29,10 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 662 && resultCode == RESULT_OK) {
-            val result = data?.getBooleanExtra("IS_COMPLETE", false)
-            Log.e("MainActivity", "onActivityResult: $result")
+            val result = data?.getSerializableExtra(BUNDLE_RESULT_KEY) as? Array<UploadResult>
+            result?.forEach {
+                Log.e("MainActivity", "onActivityResult: $it")
+            }
         }
     }
 
