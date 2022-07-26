@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- sources region -->
+    <string name="source_title">Filestack</string>
+
+    <string name="source_local">Local</string>
+    <string name="source_camera">Camera</string>
+    <string name="source_device">Device</string>
+
+    <string name="source_remote">Remote</string>
+    <string name="source_facebook">Facebook</string>
+    <string name="source_instagram">Instagram</string>
+    <string name="source_google_drive">Google Drive</string>
+    <string name="source_dropbox">Dropbox</string>
+    <string name="source_box">Box</string>
+    <string name="source_github">GitHub</string>
+    <string name="source_gmail">Gmail</string>
+    <string name="source_google_photos">Google Photos</string>
+    <string name="source_onedrive">OneDrive</string>
+    <string name="source_amazon_drive">Amazon Drive</string>
+    <!-- endregion -->
+
+    <!-- progress region -->
+    <string name="uploading">Uploading</string>
+    <string name="cancel_button">Cancel</string>
+    <!-- endregion -->
+
+    <!-- camera control region -->
+    <string name="camera_retake_photo">Retake</string>
+    <string name="camera_use_photo">Use Photo</string>
+    <!-- endregion -->
+</resources>

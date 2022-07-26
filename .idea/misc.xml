@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="filestack/src/main/res/drawable/curved_progress_bar.xml" value="0.258" />
+        <entry key="filestack/src/main/res/drawable/ic_camera_switch_selector.xml" value="0.3135" />
+        <entry key="filestack/src/main/res/drawable/ic_source_camera.xml" value="0.1945" />
+        <entry key="filestack/src/main/res/drawable/ic_source_device.xml" value="0.1945" />
+        <entry key="filestack/src/main/res/drawable/progress_bar_background.xml" value="0.258" />
+        <entry key="filestack/src/main/res/layout/camera_bottom_control.xml" value="0.375" />
+        <entry key="filestack/src/main/res/layout/camera_fragment.xml" value="0.1" />
+        <entry key="filestack/src/main/res/layout/camera_layout.xml" value="0.37604166666666666" />
+        <entry key="filestack/src/main/res/layout/container_activity.xml" value="0.25" />
+        <entry key="filestack/src/main/res/layout/image_preview_bottom_control.xml" value="0.375" />
+        <entry key="filestack/src/main/res/layout/preview_layout.xml" value="0.37604166666666666" />
+        <entry key="filestack/src/main/res/layout/source_item.xml" value="0.3736413043478261" />
+        <entry key="filestack/src/main/res/layout/source_section.xml" value="0.3736413043478261" />
+        <entry key="filestack/src/main/res/layout/sources_fragment.xml" value="0.3736413043478261" />
+        <entry key="filestack/src/main/res/layout/toolbar.xml" value="0.3736413043478261" />
+        <entry key="filestack/src/main/res/layout/uploading_progress.xml" value="0.18" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
