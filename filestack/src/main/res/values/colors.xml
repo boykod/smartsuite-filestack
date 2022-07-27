@@ -14,5 +14,6 @@
     <color name="red">#FFFF5757</color>
     <color name="divider">#FFCBD9DF</color>
     <color name="background">#FFFFFFFF</color>
+    <color name="background_header">#FF3A86FF</color>
 
 </resources>

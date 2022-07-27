@@ -1,5 +1,7 @@
 package ua.motionman.filestack.ui.uploadingprogress
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
@@ -11,8 +13,7 @@ import ua.motionman.filestack.R
 import ua.motionman.filestack.databinding.UploadingProgressBinding
 import ua.motionman.filestack.domain.model.Selection
 import ua.motionman.filestack.domain.model.UploadResult
-import ua.motionman.filestack.ui.filestacksources.SourcesFragment.Companion.COMPLETE_UPLOAD_KEY
-import ua.motionman.filestack.ui.filestacksources.SourcesFragment.Companion.UPLOAD_RESULT_KEY
+import ua.motionman.filestack.ui.filestacksources.SourcesFragment
 import ua.motionman.filestack.utils.delegate.viewBinding
 
 class UploadingProgressFragment : Fragment(R.layout.uploading_progress) {
@@ -31,7 +32,7 @@ class UploadingProgressFragment : Fragment(R.layout.uploading_progress) {
     }
 
     private fun setupListeners() {
-        binding.cancelButton.setOnClickListener { handleOnFinish(false) }
+        binding.cancelButton.setOnClickListener { handleOnCancel() }
     }
 
     private fun initFlowSubscriber() {
@@ -39,7 +40,7 @@ class UploadingProgressFragment : Fragment(R.layout.uploading_progress) {
             vm.viewState.collect { updateUi(it) }
         }
         lifecycleScope.launchWhenStarted {
-            vm.uploadEvent.collect { handleOnFinish(true, it.uploadResult) }
+            vm.uploadEvent.collect { handleOnFinish(it.uploadResult) }
         }
     }
 
@@ -56,15 +57,18 @@ class UploadingProgressFragment : Fragment(R.layout.uploading_progress) {
         vm.uploadSelections(selections, requireContext().contentResolver)
     }
 
-    private fun handleOnFinish(
-        isComplete: Boolean,
-        result: Array<UploadResult> = emptyArray()
-    ) {
+    private fun handleOnCancel() {
         vm.cancelUpload()
-        findNavController().navigate(R.id.uploadingToSources, Bundle().apply {
-            putBoolean(COMPLETE_UPLOAD_KEY, isComplete)
-            if (isComplete) putSerializable(UPLOAD_RESULT_KEY, result)
-        })
+        findNavController().navigate(R.id.uploadingToSources)
+    }
+
+    private fun handleOnFinish(result: Array<UploadResult> = emptyArray()) {
+        vm.cancelUpload()
+        val intent = Intent().apply {
+            putExtra(SourcesFragment.BUNDLE_RESULT_KEY, result)
+        }
+        activity?.setResult(Activity.RESULT_OK, intent)
+        activity?.finish()
     }
 
     private fun disableOnBackPress() {

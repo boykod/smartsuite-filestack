@@ -2,13 +2,17 @@ package ua.motionman.filestack.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ua.motionman.filestack.R
+import ua.motionman.filestack.databinding.FilestackActivityBinding
 import ua.motionman.filestack.utils.client.ClientProvider
+import ua.motionman.filestack.utils.delegate.viewBinding
 
 class FilestackActivity : AppCompatActivity() {
+
+    private val binding by viewBinding(FilestackActivityBinding::inflate)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.container_activity)
+        setContentView(binding.root)
 
         initClient()
     }

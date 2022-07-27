@@ -41,14 +41,13 @@ class MainActivity : AppCompatActivity() {
             putExtra(FilestackActivity.API_KEY, "AEHrSDUikTDqTbYuRTesYz")
             putExtra(
                 FilestackActivity.POLICY_KEY,
-                "eyJjYWxsIjogWyJyZWFkIiwgImNvbnZlcnQiLCAicGljayIsICJzdG9yZSJdLCAiZXhwaXJ5IjogMTY1ODg2NzU3My41MzYzNDYsICJtYXhTaXplIjogNTM2ODcwOTEyMH0="
+                "eyJjYWxsIjogWyJyZWFkIiwgImNvbnZlcnQiLCAicGljayIsICJzdG9yZSJdLCAiZXhwaXJ5IjogMTY1ODk5MjQ1Mi4yNzEzOTQsICJtYXhTaXplIjogNTM2ODcwOTEyMH0="
             )
             putExtra(
                 FilestackActivity.SIGNATURE_KEY,
-                "b8c29b5e7041775e28132e41b30d409571ffde6c7713d8b3afc3640f7db73864"
+                "f83f1499dd7d8b881ba5ae1f8fcf17000eafddef9095fb6d69424fefa48cd59f"
             )
             startActivityForResult(this, 662)
-//            startActivity(this)
         }
     }
 }

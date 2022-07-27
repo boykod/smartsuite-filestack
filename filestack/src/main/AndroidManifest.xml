@@ -17,6 +17,7 @@
             android:name=".ui.FilestackActivity"
             android:exported="true"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Filestack">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
