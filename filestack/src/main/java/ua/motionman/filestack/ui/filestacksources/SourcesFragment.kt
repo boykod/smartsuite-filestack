@@ -16,6 +16,7 @@ import ua.motionman.filestack.ui.uploadingprogress.UploadingProgressFragment.Com
 import ua.motionman.filestack.utils.delegate.viewBinding
 import ua.motionman.filestack.utils.extensions.toSelection
 import ua.motionman.filestack.utils.source.localSourceData
+import ua.motionman.filestack.utils.source.mimeTypes
 
 class SourcesFragment : Fragment(R.layout.sources_fragment) {
 
@@ -61,8 +62,6 @@ class SourcesFragment : Fragment(R.layout.sources_fragment) {
         }
 
     private fun proceedWithDeviceContentPicker() {
-        val mimeTypes: Array<String> = arrayOf("application/pdf", "video/*", "image/*")
-
         Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)

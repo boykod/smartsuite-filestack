@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
         android:progress="0"
-        android:progressTint="@color/primary"
         android:progressDrawable="@drawable/curved_progress_bar"
+        android:progressTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +35,7 @@
         android:layout_marginBottom="16dp"
         android:text="@string/cancel_button"
         android:textColor="@color/red"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
