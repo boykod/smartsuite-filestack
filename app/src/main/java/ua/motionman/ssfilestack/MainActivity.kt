@@ -41,11 +41,11 @@ class MainActivity : AppCompatActivity() {
             putExtra(FilestackActivity.API_KEY, "AEHrSDUikTDqTbYuRTesYz")
             putExtra(
                 FilestackActivity.POLICY_KEY,
-                "eyJjYWxsIjogWyJyZWFkIiwgImNvbnZlcnQiLCAicGljayIsICJzdG9yZSJdLCAiZXhwaXJ5IjogMTY1ODk5MjQ1Mi4yNzEzOTQsICJtYXhTaXplIjogNTM2ODcwOTEyMH0="
+                "eyJjYWxsIjogWyJyZWFkIiwgImNvbnZlcnQiLCAicGljayIsICJzdG9yZSJdLCAiZXhwaXJ5IjogMTY1OTM4MTQ3NS4wMzE1MzgsICJtYXhTaXplIjogNTM2ODcwOTEyMH0="
             )
             putExtra(
                 FilestackActivity.SIGNATURE_KEY,
-                "f83f1499dd7d8b881ba5ae1f8fcf17000eafddef9095fb6d69424fefa48cd59f"
+                "084228c71ebddf3157c9b3b2b8df233c377b6ba7a1535fad5cc2a1faed2ac780"
             )
             startActivityForResult(this, 662)
         }

@@ -4,7 +4,7 @@ val mimeTypes: Array<String> =
     arrayOf(
         "application/*",
         "video/*",
-        "image/*,",
+        "image/*",
         "audio/*",
         "font/*",
         "text/*"
