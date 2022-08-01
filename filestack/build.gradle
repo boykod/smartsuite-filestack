@@ -36,7 +36,7 @@ android {
 
 dependencies {
     // filestack java
-    implementation("com.github.KagasiraBunJee:filestack-java:0.10.4")
+    implementation("com.github.boykod:filestack-java:0.11.0")
 
     // core
     implementation("androidx.core:core-ktx:1.7.0")

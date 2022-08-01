@@ -5,6 +5,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.filestack.Client
 import com.filestack.FileLink
 import com.filestack.Progress
 import com.filestack.StorageOptions
@@ -30,7 +31,9 @@ data class UploadEvent(
     val uploadResult: Array<UploadResult> = emptyArray()
 )
 
-class UploadingProgressViewModel : ViewModel() {
+class UploadingProgressViewModel(
+    private val client: Client? = ClientProvider.instance.getClient()
+) : ViewModel() {
 
     private val _viewState = MutableStateFlow(UiState())
     val viewState = _viewState.asStateFlow()
@@ -58,7 +61,7 @@ class UploadingProgressViewModel : ViewModel() {
         selection: Selection,
         contentResolver: ContentResolver
     ) {
-        val client = ClientProvider.instance.getClient() ?: return
+        if (client == null) return
 
         val storeOptions = StorageOptions.Builder()
             .filename(selection.name)
@@ -119,8 +122,9 @@ class UploadingProgressViewModel : ViewModel() {
 
     fun cancelUpload() {
         disposable.forEach { it.dispose() }
-        response.clear()
         disposable.clear()
+        response.clear()
+        client?.cancelUpload()
     }
 
 }

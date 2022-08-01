@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import ua.motionman.filestack.R
 import ua.motionman.filestack.databinding.UploadingProgressBinding
 import ua.motionman.filestack.domain.model.Selection
@@ -57,7 +59,15 @@ class UploadingProgressFragment : Fragment(R.layout.uploading_progress) {
 
     private fun handleOnCancel() {
         vm.cancelUpload()
-        findNavController().navigate(R.id.uploadingToSources)
+        with(binding) {
+            cancelButton.visibility = View.GONE
+            cancelProgress.visibility = View.VISIBLE
+        }
+
+        lifecycleScope.launch {
+            delay(4000)
+            findNavController().navigate(R.id.uploadingToSources)
+        }
     }
 
     private fun handleOnFinish(result: Array<UploadResult> = emptyArray()) {
