@@ -29,14 +29,17 @@ class SourcesFragment : Fragment(R.layout.sources_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setToolbarTitle()
+        setupToolbar()
         initAdapter()
 
         sourceAdapter.submitList(localSourceData)
     }
 
-    private fun setToolbarTitle() {
-        binding.sourcesToolbar.toolbarTitleTextView.text = getText(R.string.source_title)
+    private fun setupToolbar() {
+        with(binding.sourcesToolbar) {
+            toolbarTitleTextView.text = getText(R.string.source_title)
+            toolbarCancelTextView.setOnClickListener { activity?.finish() }
+        }
     }
 
     private fun initAdapter() {
