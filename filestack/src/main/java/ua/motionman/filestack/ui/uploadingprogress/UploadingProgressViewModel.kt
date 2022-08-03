@@ -93,11 +93,11 @@ class UploadingProgressViewModel(
     }
 
     private fun updateProgress(currentProgress: Progress<FileLink>) {
-        updateViewState(
-            _viewState.value.copy(
-                progress = calculateProgress(currentFile, currentProgress.percent),
-            )
-        )
+        val currentPercent = calculateProgress(currentFile, currentProgress.percent)
+        val progress =
+            if (currentPercent < _viewState.value.progress) _viewState.value.progress else currentPercent
+
+        updateViewState(_viewState.value.copy(progress = progress))
     }
 
     private fun calculateProgress(file: Int, percent: Double): Int {
