@@ -10,8 +10,7 @@ import com.filestack.FileLink
 import com.filestack.Progress
 import com.filestack.StorageOptions
 import io.reactivex.Flowable
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -41,7 +40,6 @@ class UploadingProgressViewModel(
     private val _uploadEvent = Channel<UploadEvent>()
     val uploadEvent = _uploadEvent.receiveAsFlow()
 
-    private var disposable = mutableListOf<Disposable>()
     private val response = mutableListOf<UploadResult>()
 
     private var currentFile = 0
@@ -49,8 +47,8 @@ class UploadingProgressViewModel(
     fun uploadSelections(
         data: Array<Selection>?,
         contentResolver: ContentResolver
-    ) {
-        if (data.isNullOrEmpty()) return
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        if (data.isNullOrEmpty()) return@launch
 
         updateViewState(_viewState.value.copy(totalFiles = data.size))
 
@@ -75,21 +73,19 @@ class UploadingProgressViewModel(
             storeOptions
         )
 
-        disposable.add(
-            upload
-                .subscribeOn(Schedulers.io())
+        try {
+            val file: FileLink = upload
                 .doOnNext { updateProgress(it) }
-                .doOnComplete { proceedOnComplete() }
                 .doOnError { Log.e("SourceFragment", "doOnError $it") }
-                .subscribe {
-                    it.data?.let { file ->
-                        val responseData = with(file) {
-                            UploadResult(container, filename, mimeType, size, url, key)
-                        }
-                        response.add(responseData)
-                    }
-                }
-        )
+                .blockingLast().data
+
+            val responseData = with(file) {
+                UploadResult(container, filename, mimeType, size, url, key)
+            }
+            response.add(responseData)
+            proceedOnComplete()
+        } catch (e: Exception) {
+        }
     }
 
     private fun updateProgress(currentProgress: Progress<FileLink>) {
@@ -121,10 +117,8 @@ class UploadingProgressViewModel(
     }
 
     fun cancelUpload() {
-        disposable.forEach { it.dispose() }
-        disposable.clear()
-        response.clear()
         client?.cancelUpload()
+        response.clear()
     }
 
 }
